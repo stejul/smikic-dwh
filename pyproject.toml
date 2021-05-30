@@ -6,7 +6,7 @@ authors = ["stejul <stejul@rocketmail.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.7"
 SQLAlchemy = "^1.4.15"
 luigi = "^3.0.3"
 python-dotenv = "^0.17.1"
