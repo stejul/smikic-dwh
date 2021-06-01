@@ -27,4 +27,13 @@ services:
       - "9092:9092"
     depends_on: 
       - zookeeper
-    
+  brokerMonitor:
+    container_name: "broker-monitor"
+    image: obsidiandynamics/kafdrop
+    restart: "no"
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "broker:9092"
+    depends_on:
+      - broker
