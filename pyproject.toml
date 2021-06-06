@@ -11,6 +11,8 @@ SQLAlchemy = "^1.4.15"
 luigi = "^3.0.3"
 python-dotenv = "^0.17.1"
 kafka-python = "^2.0.2"
+requests = "^2.25.1"
+tweepy = "^3.10.0"
 
 [tool.poetry.dev-dependencies]
 
