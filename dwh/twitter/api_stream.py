@@ -32,8 +32,8 @@ stream = Stream(auth, listener)
 
 def periodicWork(interval):
     while True:
-        #stream.filter(track=["Data Science"])
-        stream.sample()
+        stream.filter(track=["Data Science"])
+        #stream.sample()
         time.sleep(interval)
 
 periodicWork(60 * 0.1)
