@@ -2,7 +2,6 @@ from dotenv import load_dotenv
 from kafka import KafkaProducer
 from tweepy import Stream, StreamListener, OAuthHandler
 
-from datetime import datetime
 import os
 import time
 
