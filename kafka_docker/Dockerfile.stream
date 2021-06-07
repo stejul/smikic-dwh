@@ -1,0 +1,11 @@
+FROM python:3.9
+
+WORKDIR /stream
+
+COPY requirements.txt /stream/requirements.txt
+COPY dwh/twitter/api_stream.py /stream/api_stream.py
+COPY .env /stream/.env
+
+RUN pip install -r requirements.txt
+
+CMD python api_stream.py

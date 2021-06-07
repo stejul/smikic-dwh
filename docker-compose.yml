@@ -39,3 +39,19 @@ services:
       KAFKA_BROKERCONNECT: "broker:9092"
     depends_on:
       - broker
+  twitter-stream:
+    container_name: "api_stream"
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: ./kafka_docker/Dockerfile.stream
+    depends_on:
+      - zookeeper
+      - broker
+  consumer:
+    container_name: "api_consumer"
+    build:
+      context: .
+      dockerfile: ./kafka_docker/Dockerfile.consumer
+    depends_on:
+      - twitter-stream
