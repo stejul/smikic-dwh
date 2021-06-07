@@ -22,7 +22,7 @@ class TwitterStreamListener(StreamListener):
     def on_error(self, status):
         print(status)
 
-producer = KafkaProducer(bootstrap_servers="localhost:9092")
+producer = KafkaProducer(bootstrap_servers="broker:9092")
 listener = TwitterStreamListener()
 
 auth = OAuthHandler(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_KEY_SECRET)
