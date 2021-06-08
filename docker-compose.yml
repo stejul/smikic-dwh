@@ -48,6 +48,7 @@ services:
     depends_on:
       - zookeeper
       - broker
+      - stream-db
   consumer:
     container_name: "api_consumer"
     build:
@@ -55,3 +56,31 @@ services:
       dockerfile: ./kafka_docker/Dockerfile.consumer
     depends_on:
       - twitter-stream
+  stream-connector:
+    build:
+      context: .
+      dockerfile: ./kafka_docker/Dockerfile.connector_mongodb
+    depends_on:
+      - broker
+      - twitter-stream
+      - stream-db
+  stream-db:
+    image: mongo:4.4.6
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${POSTGRES_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${POSTGRES_PASSWORD}"
+      MONGO_INTIDB_DATABASE: "${POSTGRES_DB}"
+    depends_on:
+      - broker
+  mongo-express:
+      image: mongo-express
+      restart: always
+      ports:
+        - 8081:8081
+      environment:
+        ME_CONFIG_MONGODB_ADMINUSERNAME: "${POSTGRES_USER}"
+        ME_CONFIG_MONGODB_ADMINPASSWORD: "${POSTGRES_PASSWORD}" 
+        ME_CONFIG_MONGODB_SERVER: "stream-db"
+      depends_on:
+        - stream-db
