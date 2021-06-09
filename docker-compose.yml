@@ -14,7 +14,7 @@ services:
   zookeeper:
     build:
       context: .
-      dockerfile: ./kafka_docker/Dockerfile.zookeeper
+      dockerfile: ./kafka_docker/zookeeper/Dockerfile.zookeeper
     container_name: "zookeeper"
     ports:
       - "2181:2181"
@@ -23,7 +23,7 @@ services:
   broker:
     build:
       context: .
-      dockerfile: ./kafka_docker/Dockerfile.kafka
+      dockerfile: ./kafka_docker/broker/Dockerfile.kafka
     container_name: "broker"
     ports:
       - "9092:9092"
@@ -59,7 +59,7 @@ services:
   stream-connector:
     build:
       context: .
-      dockerfile: ./kafka_docker/Dockerfile.connector_mongodb
+      dockerfile: ./kafka_docker/connector/Dockerfile.connector_mongodb
     depends_on:
       - broker
       - twitter-stream

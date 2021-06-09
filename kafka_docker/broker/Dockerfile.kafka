@@ -14,7 +14,7 @@ WORKDIR /broker/kafka
 
 RUN rm /broker/kafka/config/server.properties
 
-COPY ./kafka_docker/server.properties /broker/kafka/config/
+COPY ./kafka_docker/broker/server.properties /broker/kafka/config/
 
 CMD bin/kafka-server-start.sh config/server.properties
 

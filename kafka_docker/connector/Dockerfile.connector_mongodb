@@ -11,7 +11,7 @@ WORKDIR /connector/kafka
 
 RUN rm /connector/kafka/config/connect-standalone.properties
 
-COPY ./kafka_docker/connect-standalone.properties /connector/kafka/config/
+COPY ./kafka_docker/connector/connect-standalone.properties /connector/kafka/config/
 
 RUN mkdir /connector/kafka/connector
 
@@ -24,7 +24,7 @@ RUN tar -xzf /connector/kafka/connector/mongodb-kafka.tar.gz
 RUN rm /connector/kafka/connector/mongodb-kafka.tar.gz
 
 RUN rm /connector/kafka/connector/mongodb-kafka-connect-mongodb-1.5.1/etc/MongoSinkConnector.properties
-COPY ./kafka_docker/MongoSinkConnector.properties /connector/kafka/connector/mongodb-kafka-connect-mongodb-1.5.1/etc/
+COPY ./kafka_docker/connector/MongoSinkConnector.properties /connector/kafka/connector/mongodb-kafka-connect-mongodb-1.5.1/etc/
 
 WORKDIR /connector/kafka
 
