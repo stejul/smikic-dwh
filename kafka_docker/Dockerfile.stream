@@ -4,10 +4,9 @@ WORKDIR /stream
 
 COPY requirements.txt /stream/requirements.txt
 #COPY dwh/twitter/api_stream.py /stream/api_stream.py
-COPY dwh/twitter/stream/listener.py /stream/listener.py
-COPY dwh/twitter/stream/twitter_stream.py /stream/twitter_stream.py
+COPY dwh/ /stream
 COPY .env /stream/.env
 
 RUN pip install -r requirements.txt
 
-CMD python twitter_stream.py
+CMD python streams/twitter_stream.py

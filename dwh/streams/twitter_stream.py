@@ -1,6 +1,6 @@
 import sys
 sys.path.append("./listener.py")
-from listener import TwitterListener
+from dwh.streams.listener import TwitterListener
 
 from dotenv import load_dotenv
 from tweepy import Stream, OAuthHandler
@@ -29,4 +29,6 @@ class TwitterStream():
             time.sleep(interval)
 
 if __name__ == "__main__":
-   TwitterStream.periodicWork(60*0.1) 
+    object = TwitterStream()
+    object.periodicWork(60*0.1)
+    
