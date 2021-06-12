@@ -1,5 +1,5 @@
 import sys
-sys.path.append("./listener.py")
+#sys.path.append("./listener.py")
 from dwh.streams.listener import TwitterListener
 
 from dotenv import load_dotenv
