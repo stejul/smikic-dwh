@@ -12,4 +12,6 @@ COPY ./ /stream
 
 RUN pip install -r requirements.txt
 
+# for debugging
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
 CMD python dwh/streams/twitter_stream.py
