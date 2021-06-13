@@ -1,6 +1,6 @@
 import sys
 #sys.path.append("./listener.py")
-from dwh.streams.listener import TwitterListener
+from dwh.twitter.listener import Listener as TwitterListener
 
 from dotenv import load_dotenv
 from tweepy import Stream, OAuthHandler

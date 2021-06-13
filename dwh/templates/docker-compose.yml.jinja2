@@ -39,23 +39,23 @@ services:
       KAFKA_BROKERCONNECT: "broker:9092"
     depends_on:
       - broker
-
-  datascience-stream:
+{% for item in container_items %}
+  {{item.container_name}}-stream:
     restart: always
     build:
       context: .
-      dockerfile: ./kafka_docker/Dockerfile_datascience.stream
+      dockerfile: ./kafka_docker/Dockerfile_{{item.container_name}}.stream
     depends_on:
       - zookeeper
       - broker
       - stream-db
-  datascience-consumer:
+  {{item.container_name}}-consumer:
     build:
       context: .
-      dockerfile: ./kafka_docker/Dockerfile_datascience.consumer
+      dockerfile: ./kafka_docker/Dockerfile_{{item.container_name}}.consumer
     depends_on:
-      - datascience-stream
-
+      - {{item.container_name}}-stream
+{% endfor %}
   stream-connector:
     build:
       context: .
@@ -63,7 +63,7 @@ services:
     depends_on:
       - broker
       - stream-db
-      - datascience-stream
+{% for item in container_items %}      - {{item.container_name}}-stream{% endfor %}{# need a lot of spaces for yml indentation #}
   stream-db:
     image: mongo:4.4.6
     restart: always

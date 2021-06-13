@@ -1,9 +1,12 @@
 from tweepy import StreamListener
 from kafka import KafkaProducer
 
-class TwitterListener(StreamListener):
+class Listener(StreamListener):
 
-    producer = KafkaProducer(bootstrap_servers="broker:9092")
+    try:
+        producer = KafkaProducer(bootstrap_servers="broker:9092")
+    except:
+        pass
     TOPIC_NAME = "dataScience"
 
     def on_data(self, data):

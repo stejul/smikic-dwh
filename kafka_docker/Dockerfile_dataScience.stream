@@ -1,0 +1,17 @@
+FROM python:3.9
+
+WORKDIR /stream
+
+# set python path to project folder, so python can import modules
+ENV PYTHONPATH "${PYTHONPATH}:/stream/"
+
+COPY requirements.txt /stream/requirements.txt
+#COPY dwh/twitter/api_stream.py /stream/api_stream.py
+COPY ./ /stream
+#COPY .env /stream/.env
+
+RUN pip install -r requirements.txt
+
+# for debugging
+#ENTRYPOINT ["tail", "-f", "/dev/null"]
+CMD python dwh/twitter/listener.py

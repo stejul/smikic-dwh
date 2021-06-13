@@ -39,31 +39,31 @@ services:
       KAFKA_BROKERCONNECT: "broker:9092"
     depends_on:
       - broker
-
-  datascience-stream:
-    restart: always
+  twitter-stream:
+    container_name: "api_stream"
+    restart: on-failure
     build:
       context: .
-      dockerfile: ./kafka_docker/Dockerfile_datascience.stream
+      dockerfile: ./kafka_docker/Dockerfile.stream
     depends_on:
       - zookeeper
       - broker
       - stream-db
-  datascience-consumer:
+  consumer:
+    container_name: "api_consumer"
     build:
       context: .
-      dockerfile: ./kafka_docker/Dockerfile_datascience.consumer
+      dockerfile: ./kafka_docker/Dockerfile.consumer
     depends_on:
-      - datascience-stream
-
+      - twitter-stream
   stream-connector:
     build:
       context: .
       dockerfile: ./kafka_docker/connector/Dockerfile.connector_mongodb
     depends_on:
       - broker
+      - twitter-stream
       - stream-db
-      - datascience-stream
   stream-db:
     image: mongo:4.4.6
     restart: always
