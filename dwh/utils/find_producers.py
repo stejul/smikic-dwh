@@ -23,7 +23,7 @@ def find_producers():
     for plugin, filePath in zip(result,file_path):
         #print(plugin, filePath)
         module_lib = import_module(plugin, ".")
-        classes.append({"topic_name": module_lib.Listener().TOPIC_NAME, "file_path": filePath})
+        classes.append({"topic_name": getattr(module_lib.Listener(), "TOPIC_NAME"), "file_path": filePath})
 
     return classes
 
