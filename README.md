@@ -61,11 +61,6 @@ or
     poetry install
 ```
 
-## Authors
-
-- [@stejul](https://www.github.com/stejul)
-
-  
 ## Run Locally
 
 Clone the project
@@ -92,9 +87,14 @@ Start the docker environment
 [MIT](https://github.com/stejul/smikic-dwh/blob/main/LICENSE)
 
   
+## Authors
+
+- [@stejul](https://www.github.com/stejul)
+
+  
 ## Acknowledgements
 
  - [I wanna thank me](https://www.youtube.com/watch?v=c-Pv55i2bc0)
  - [I wanna thank me for believing in me](https://www.youtube.com/watch?v=c-Pv55i2bc0)
 
-  
+   
