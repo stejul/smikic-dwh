@@ -1,11 +1,14 @@
+import logging
 from tweepy import StreamListener
 from kafka import KafkaProducer
 
 class Listener(StreamListener):
-
+    
+    logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s")
     try:
         producer = KafkaProducer(bootstrap_servers="broker:9092")
     except:
+        logging.warning("Can't find broker")
         pass
     TOPIC_NAME = "dataScience"
 
