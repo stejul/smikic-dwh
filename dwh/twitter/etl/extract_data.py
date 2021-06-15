@@ -2,7 +2,7 @@ from luigi import Task, LocalTarget, run
 from pymongo import MongoClient
 from dotenv import load_dotenv
 from urllib.parse import quote_plus
-from bson.json_util import loads, dumps
+from bson.json_util import dumps
 
 import os
 import logging
