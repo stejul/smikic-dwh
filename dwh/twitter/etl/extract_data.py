@@ -8,7 +8,7 @@ import os
 import logging
 
 
-class LoadData(Task):
+class ExtractData(Task):
     load_dotenv()
     logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s")
     
@@ -40,4 +40,4 @@ class LoadData(Task):
         logging.info("connecting to database")
 
 if __name__ == "__main__":
-    run(main_task_cls=LoadData, local_scheduler=False)
+    run(main_task_cls=ExtractData, local_scheduler=False)

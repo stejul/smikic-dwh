@@ -1,11 +1,11 @@
-from dwh.twitter.etl.extract_data import LoadData
+from dwh.twitter.etl.extract_data import ExtractData
 from luigi import Task, LocalTarget, run
 import pandas as pd
 
 class TransformData(Task):
 
     def requires(self):
-        return [LoadData()]
+        return [ExtractData()]
 
     def output(self):
         return LocalTarget("dwh/twitter/etl/dump/transformedData.csv")
