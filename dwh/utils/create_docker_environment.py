@@ -1,9 +1,8 @@
-import logging
 from jinja2 import Environment, FileSystemLoader
-from jinja2.environment import TemplateStream
 from dwh.utils.find_producers import find_producers
 
-logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s")
+import logging
+logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
 def create_docker_compose()->None:
     file_loader = FileSystemLoader("dwh/templates")
@@ -17,8 +16,8 @@ def create_docker_compose()->None:
 
     template = env.get_template("docker-compose.yml.jinja2")
 
+    logging.info("Creating docker-compose")
     with open("docker-compose.yml", "w") as f:
-        logging.info("Creating docker-compose")
 
         f.write(template.render(container_items=container_items))
 
@@ -31,8 +30,8 @@ def create_dockerfile_stream()->None:
 
     for entry in listeners:
         with open(f"kafka_docker/Dockerfile_{entry.get('topic_name').lower()}.stream", "w") as f:
-            logging.info(f"creating Dockerfile.stream - {entry.get('topic_name')}")
 
+            logging.info(f"Creating Dockerfile stream- {entry.get('topic_name')}")
             f.write(template.render(file_path=entry.get("file_path")))
 
 
@@ -45,8 +44,8 @@ def create_dockerfile_consumer()->None:
 
     for entry in listeners:
         with open(f"kafka_docker/Dockerfile_{entry.get('topic_name').lower()}.consumer", "w") as f:
-            logging.info(f"Creating Dockerfile consumer - {entry.get('topic_name')}")
 
+            logging.info(f"Creating Dockerfile consumer - {entry.get('topic_name')}")
             f.write(template.render(topic_name=entry.get("topic_name")))
 
     

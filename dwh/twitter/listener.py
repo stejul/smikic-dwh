@@ -1,10 +1,11 @@
-import logging
 from tweepy import StreamListener
 from kafka import KafkaProducer
 
+import logging
+logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+
 class Listener(StreamListener):
-    
-    logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s")
+
     try:
         producer = KafkaProducer(bootstrap_servers="broker:9092")
     except:

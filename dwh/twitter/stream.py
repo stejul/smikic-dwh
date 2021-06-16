@@ -1,5 +1,4 @@
 import sys
-#sys.path.append("./listener.py")
 from dwh.twitter.listener import Listener as TwitterListener
 
 from dotenv import load_dotenv
@@ -8,6 +7,8 @@ from tweepy import Stream, OAuthHandler
 
 import os
 import time
+import logging
+logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s")
 
 class TwitterStream():
 
@@ -24,6 +25,7 @@ class TwitterStream():
         auth.set_access_token(self.TWITTER_ACCESS_TOKEN, self.TWITTER_ACCESS_TOKEN_SECRET)
 
         stream = Stream(auth, listener)
+        logging.info("starting twitter data science stream")
         while True:
             stream.filter(track=["Data Science"])
             time.sleep(interval)

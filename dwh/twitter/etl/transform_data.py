@@ -1,6 +1,9 @@
 from dwh.twitter.etl.extract_data import ExtractData
 from luigi import Task, LocalTarget, run
+
 import pandas as pd
+import logging
+logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
 class TransformData(Task):
 
@@ -20,6 +23,8 @@ class TransformData(Task):
         user_tweet = user[["id", "name", "screen_name", "description"]]
         tweet = df[["id", "text", "created_at"]]
         merged_df = pd.concat([user_tweet.add_suffix("_user"), tweet.add_suffix("_tweet")], axis=1)
+
+        logging.info("transforming data")
 
         outfile = open(self.output().path, "wb") 
         merged_df.to_csv(outfile, encoding="utf-8",index=False)

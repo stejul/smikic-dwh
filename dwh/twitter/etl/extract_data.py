@@ -6,11 +6,11 @@ from bson.json_util import dumps
 
 import os
 import logging
+logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
 
 class ExtractData(Task):
     load_dotenv()
-    logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s")
     
     def requires(self)->None:
         return []

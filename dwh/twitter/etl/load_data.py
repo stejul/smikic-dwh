@@ -5,7 +5,6 @@ from luigi import Task, run
 from urllib.parse import quote_plus
 
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session 
 
 from dotenv import load_dotenv
@@ -17,6 +16,8 @@ from dwh.twitter.models import Base
 
 import pandas as pd
 import os
+import logging
+logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 
 class LoadDataInDwh(Task):
     load_dotenv()
@@ -58,6 +59,7 @@ class LoadDataInDwh(Task):
             
             session.add(tweet)
 
+        logging.info("saving data to dwh")
         session.commit()
 
 if __name__ == "__main__":
