@@ -19,12 +19,13 @@ class ExtractData(Task):
         return LocalTarget("dwh/twitter/etl/dump/MongoDB_output.json")
 
     def run(self):
-        DB_USER = os.getenv("POSTGRES_USER")
-        DB_PASSWORD = os.getenv("POSTGRES_PASSWORD")
+        DB_USER = os.getenv("MONGO_USER")
+        DB_PASSWORD = os.getenv("MONGO_PASSWORD")
+        DB_NAME = os.getenv("MONGO_DB")
 
         #Connect to database and collection
         client = MongoClient(host=["localhost:27017"], username=quote_plus(DB_USER), password=quote_plus(DB_PASSWORD))
-        db = client["dwh"]
+        db = client[DB_NAME]
         collection = db["sink"]
 
         result = []

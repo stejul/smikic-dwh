@@ -70,9 +70,9 @@ services:
       - 27017:27017
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: "${POSTGRES_USER}"
-      MONGO_INITDB_ROOT_PASSWORD: "${POSTGRES_PASSWORD}"
-      MONGO_INTIDB_DATABASE: "${POSTGRES_DB}"
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USER}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD}"
+      MONGO_INTIDB_DATABASE: "${MONGO_DB}"
     depends_on:
       - broker
   mongo-express:

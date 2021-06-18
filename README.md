@@ -49,6 +49,12 @@ To run this project, you will need to add the following environment variables to
 
 `TWITTER_ACCESS_TOKEN_SECRET`
 
+`MONGO_USER`
+
+`MONGO_PASSWORD`
+
+`MONGO_DB`
+
 ## Installation 
 
 To install the project either use `pip` or `poetry`
@@ -74,6 +80,9 @@ Generate docker environment
 ```bash
   python dwh/utils/create_docker_environment.py
 ```
+Change the MongoDB credentials for the MongoDB-Kafka connector:
+
+`kafka_docker/connector/MongoSinkConnector.properties`
 
 Start the docker environment
 
