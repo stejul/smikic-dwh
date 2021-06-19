@@ -8,9 +8,15 @@ from tweepy import Stream, OAuthHandler
 import os
 import time
 import logging
-logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s")
 
-class TwitterStream():
+logging.basicConfig(
+    filename="dwh/app.log",
+    filemode="a",
+    format="%(name)s - %(levelname)s - %(message)s",
+)
+
+
+class TwitterStream:
 
     load_dotenv()
 
@@ -22,7 +28,9 @@ class TwitterStream():
     def periodicWork(self, interval):
         listener = TwitterListener()
         auth = OAuthHandler(self.TWITTER_CONSUMER_KEY, self.TWITTER_CONSUMER_KEY_SECRET)
-        auth.set_access_token(self.TWITTER_ACCESS_TOKEN, self.TWITTER_ACCESS_TOKEN_SECRET)
+        auth.set_access_token(
+            self.TWITTER_ACCESS_TOKEN, self.TWITTER_ACCESS_TOKEN_SECRET
+        )
 
         stream = Stream(auth, listener)
         logging.info("starting twitter data science stream")
@@ -30,7 +38,7 @@ class TwitterStream():
             stream.filter(track=["Data Science"])
             time.sleep(interval)
 
+
 if __name__ == "__main__":
     object = TwitterStream()
-    object.periodicWork(60*0.1)
-    
+    object.periodicWork(60 * 0.1)

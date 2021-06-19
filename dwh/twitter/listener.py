@@ -2,7 +2,14 @@ from tweepy import StreamListener
 from kafka import KafkaProducer
 
 import logging
-logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+
+logging.basicConfig(
+    filename="dwh/app.log",
+    filemode="a",
+    format="%(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
+)
+
 
 class Listener(StreamListener):
 
@@ -20,6 +27,6 @@ class Listener(StreamListener):
 
     def on_error(self, status):
         print(status)
-    
+
     def getTopicName(self):
         return self.TOPIC_NAME

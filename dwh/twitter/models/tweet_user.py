@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 
 from dwh.twitter.models import Base
 
+
 class TweetUser(Base):
 
     __tablename__ = "tweet_user"

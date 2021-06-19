@@ -5,7 +5,7 @@ from luigi import Task, run
 from urllib.parse import quote_plus
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session 
+from sqlalchemy.orm import Session
 
 from dotenv import load_dotenv
 
@@ -17,7 +17,14 @@ from dwh.twitter.models import Base
 import pandas as pd
 import os
 import logging
-logging.basicConfig(filename="dwh/app.log", filemode="a", format="%(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+
+logging.basicConfig(
+    filename="dwh/app.log",
+    filemode="a",
+    format="%(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
+)
+
 
 class LoadDataInDwh(Task):
     load_dotenv()
@@ -36,7 +43,9 @@ class LoadDataInDwh(Task):
 
         df = pd.read_csv("dwh/twitter/etl/dump/transformedData.csv")
 
-        engine = create_engine(f"postgresql://{quote_plus(DB_USER)}:{quote_plus(DB_PASSWORD)}@localhost/{quote_plus(DB_NAME)}")
+        engine = create_engine(
+            f"postgresql://{quote_plus(DB_USER)}:{quote_plus(DB_PASSWORD)}@localhost/{quote_plus(DB_NAME)}"
+        )
 
         Base.metadata.drop_all(engine)
         Base.metadata.create_all(engine)
@@ -45,22 +54,27 @@ class LoadDataInDwh(Task):
 
         for idx, entry in df.iterrows():
 
-            user=TweetUser(screen_name=entry["screen_name_user"],
-                    name=entry["name_user"],
-                    twitter_id = entry["id_user"])
+            user = TweetUser(
+                screen_name=entry["screen_name_user"],
+                name=entry["name_user"],
+                twitter_id=entry["id_user"],
+            )
 
-            tweet = Tweet(text=entry["text_tweet"],
-                        tweet_id=entry["id_tweet"],
-                        created_at=entry["created_at_tweet"])
+            tweet = Tweet(
+                text=entry["text_tweet"],
+                tweet_id=entry["id_tweet"],
+                created_at=entry["created_at_tweet"],
+            )
 
-            tweet.tweet_user=user
-            
+            tweet.tweet_user = user
+
             session.add(user)
-            
+
             session.add(tweet)
 
         logging.info("saving data to dwh")
         session.commit()
+
 
 if __name__ == "__main__":
     run(main_task_cls=LoadDataInDwh, local_scheduler=False)

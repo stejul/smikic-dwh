@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 
 from dwh.twitter.models import Base
 
+
 class Tweet(Base):
 
     __tablename__ = "tweet"
@@ -13,6 +14,3 @@ class Tweet(Base):
     created_at = Column(DateTime)
 
     user_id = Column(BigInteger, ForeignKey("tweet_user.id"), nullable=True)
-    #tweeter_user = relationship("TweetUser")
-
-
