@@ -28,5 +28,5 @@ class Listener(StreamListener):
     def on_error(self, status):
         print(status)
 
-    def getTopicName(self):
+    def get_topic_name(self):
         return self.TOPIC_NAME

@@ -25,7 +25,7 @@ class TwitterStream:
     TWITTER_ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")
     TWITTER_ACCESS_TOKEN_SECRET = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 
-    def periodicWork(self, interval):
+    def periodic_work(self, interval):
         listener = TwitterListener()
         auth = OAuthHandler(self.TWITTER_CONSUMER_KEY, self.TWITTER_CONSUMER_KEY_SECRET)
         auth.set_access_token(
@@ -41,4 +41,4 @@ class TwitterStream:
 
 if __name__ == "__main__":
     object = TwitterStream()
-    object.periodicWork(60 * 0.1)
+    object.periodic_work(60 * 0.1)
